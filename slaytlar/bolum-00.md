@@ -299,11 +299,12 @@ Her dersin kodu **çalışır halde** depoda.
 
 </div>
 
-<div class="ky-gorsel-yer">
-  GÖRSEL<br>
-  <code>b0-github-depo.png</code><br>
-  GitHub deposunun ana sayfası · en az 960×720
-</div>
+<figure class="ky-gorsel">
+  <div class="ky-gorsel__cerceve">
+    <img src="/gorseller/b0-github-depo.jpg" alt="Kurs deposunun GitHub sayfası">
+  </div>
+  <figcaption>Kurs deposu — kurulum, kod, görevler ve ödevler</figcaption>
+</figure>
 
 </div>
 

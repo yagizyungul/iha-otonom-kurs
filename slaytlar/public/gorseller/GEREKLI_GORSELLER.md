@@ -22,16 +22,18 @@ Bana linki gönderirsen indirip yerine yerleştiririm.
 
 ---
 
-## Bölüm 0 — Kursa Giriş
+## Bölüm 0 — Kursa Giriş · ✅ TAMAM
 
-| Dosya adı | Slayt | Ne olmalı | Boyut |
+Yer tutucu kalmadı, dört görselin dördü de yerinde.
+
+| Dosya | Slayt | Kaynak | Not |
 |---|---|---|---|
-| `b0-final-demo.jpg` | 3 (tam ekran) | Gazebo'da 3 uçak havada, uydu haritalı zemin. **Kursun vitrini** — en iyi kareyi buraya koy | 1920×1080 |
-| `b0-ubuntu-masaustu.png` | 7 | Ubuntu 22.04 masaüstü, bir terminal açık | 960×720 |
-| `b0-github-depo.png` | 10 | Kurs GitHub deposunun ana sayfası | 960×720 |
-| `b0-rehber-pdf.png` | 11 | PDF rehberin kapağı veya bir kurulum sayfası | 960×720 |
+| `b0-final-demo.jpg` | 3 (tam ekran) | `gazebo_uc_ucak.png` | Arayüz panelleri kırpıldı, 16:9. **Uçaklar pistte, havada değil** — havadayken çekilmiş daha yakın bir kare bu slaydı belirgin şekilde güçlendirir |
+| `b0-ubuntu-masaustu.jpg` | 7 | `ubuntu_22.04.jpeg` | 656×467, önerilenin altında ama çerçevede 1.09× büyütüldüğü için sorun çıkarmıyor |
+| `b0-github-depo.jpg` | 10 | `github_repo.png` | Tarayıcı çubuğu ve About paneli kırpıldı |
+| `b0-rehber-pdf.jpg` | 11 | rehber PDF s.19 | **GEÇİCİ** — kursun kendi yazılı rehberi hazırlanınca değişecek |
 
-**Hazır olanlar:** `sitl_images.jpeg` (slayt 5), `pixhawk.jpg` (slayt 8).
+**Zaten vardı:** `sitl_images.jpeg` (slayt 5), `pixhawk.jpg` (slayt 8).
 
 ---
 
