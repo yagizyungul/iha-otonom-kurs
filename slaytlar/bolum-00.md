@@ -326,11 +326,15 @@ oku, rehberden kopyala.
 
 </div>
 
-<div class="ky-gorsel-yer">
-  GÖRSEL<br>
-  <code>b0-rehber-pdf.png</code><br>
-  PDF rehberin kapağı veya bir kurulum sayfası · en az 960×720
-</div>
+<!-- GEÇİCİ: mevcut SITL rehberinin "Adım 13 İlk Çalıştırma Testi" sayfası.
+     Kursun kendi yazılı rehberi hazır olunca bu görsel değişecek. -->
+
+<figure class="ky-gorsel">
+  <div class="ky-gorsel__cerceve">
+    <img src="/gorseller/b0-rehber-pdf.jpg" alt="Yazılı rehberin bir kurulum sayfası">
+  </div>
+  <figcaption>Rehberden bir kurulum sayfası — komutlar kopyalanabilir</figcaption>
+</figure>
 
 </div>
 
