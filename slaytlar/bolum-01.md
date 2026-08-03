@@ -104,6 +104,42 @@ Bölüm 1 · Sistem nasıl çalışıyor?
 
 ---
 
+<!-- ─────────── YENİ · NEREDE KULLANILIYOR ─────────── -->
+
+# Nerede kullanılıyor?
+
+<div class="ky-kartlar">
+
+  <div class="ky-kart ky-kart--turkuaz">
+    <div class="ky-kart__ust">🌾</div>
+    <div class="ky-kart__govde">
+      <strong>Tarım</strong><br>
+      Tarla tarama, ilaçlama, verim haritası
+    </div>
+  </div>
+
+  <div class="ky-kart ky-kart--mavi">
+    <div class="ky-kart__ust">🗺</div>
+    <div class="ky-kart__govde">
+      <strong>Haritalama</strong><br>
+      Fotogrametri, maden ve inşaat ölçümü
+    </div>
+  </div>
+
+  <div class="ky-kart ky-kart--pembe">
+    <div class="ky-kart__ust">🔍</div>
+    <div class="ky-kart__govde">
+      <strong>Arama-kurtarma</strong><br>
+      Geniş alan tarama, termal kamera
+    </div>
+  </div>
+
+</div>
+
+Hepsinin ortak noktası: **uzun süre**, **geniş alan**, **tekrarlanabilir rota**.
+
+---
+
 <!-- ─────────── 4 · İKİ TİP ─────────── -->
 
 # İki ana tip
@@ -153,6 +189,24 @@ Bölüm 1 · Sistem nasıl çalışıyor?
 
 ---
 
+<!-- ─────────── YENİ · KARŞILAŞTIRMA ─────────── -->
+
+# Sayılarla karşılaştırma
+
+```
+                 Sabit kanat      Multirotor
+------------------------------------------------
+Uçuş süresi      45–90 dk         15–30 dk
+Menzil           on km'ler        birkaç km
+Havada durma     yapamaz          yapabilir
+Kalkış           pist / fırlatma  dikey
+Rüzgâr           daha dayanıklı   daha hassas
+```
+
+Değerler tipik sınıflar için; modele göre değişir.
+
+---
+
 <!-- ─────────── 6 · OTONOMİ SEVİYELERİ ─────────── -->
 
 # Otonomi seviyeleri
@@ -186,6 +240,30 @@ Bölüm 1 · Sistem nasıl çalışıyor?
       <strong>Otonom</strong><br>Kendi karar verir
     </div>
   </div>
+
+</div>
+
+---
+
+<!-- ─────────── YENİ · KURS NEREYE ─────────── -->
+
+# Bu kurs seni nereye götürüyor?
+
+<div class="ky-ikili">
+
+<div>
+
+- **Bölüm 3–4:** seviye 2 — waypoint takibi
+- **Bölüm 6:** seviye 2–3 — kodla kontrol
+- **Bölüm 7:** seviye 3 — kameradan karar
+
+</div>
+
+<div class="ky-kutu ky-kutu--olumlu">
+  <div class="ky-kutu__baslik">Seviye atlamak kod işi</div>
+  Donanım aynı kalıyor. Farkı yaratan, uçağa <strong>ne
+  söylediğin</strong>.
+</div>
 
 </div>
 
@@ -256,6 +334,32 @@ Uçağın **beyni**. Sensörleri okur, kontrol yüzeylerini sürer.
 
 ---
 
+<!-- ─────────── YENİ · SENSÖR FÜZYONU ─────────── -->
+
+# Neden tek sensör yetmez?
+
+<div class="ky-ikili">
+
+<div>
+
+Her sensörün bir zayıflığı var:
+
+- **IMU** hızlı ama **kayar** — hata birikir
+- **GPS** kaymaz ama **yavaş** ve kesilebilir
+- **Barometre** hava durumundan etkilenir
+
+</div>
+
+<div class="ky-kutu">
+  <div class="ky-kutu__baslik">Kestirim (EKF)</div>
+  Otopilot hepsini birleştirip <strong>tek bir tahmin</strong> üretir.
+  Biri kesilirse diğerleri boşluğu doldurur.
+</div>
+
+</div>
+
+---
+
 <!-- ─────────── 9 · KONTROL DÖNGÜSÜ ─────────── -->
 
 # Ne yapıyor?
@@ -271,6 +375,24 @@ flowchart LR
 ```
 
 Bu döngü **saniyede yüzlerce kez** dönüyor.
+
+---
+
+<!-- ─────────── YENİ · UÇUŞ MODU ─────────── -->
+
+# Uçuş modu nedir?
+
+Otopilotun **ne kadar iş üstlendiğini** belirleyen ayar.
+
+```
+MANUAL     kumanda doğrudan yüzeylere
+STABILIZE  otopilot dengeyi tutar
+GUIDED     tek hedefe otonom uçuş
+AUTO       yüklü rotayı takip eder
+RTL        kalkış noktasına döner
+```
+
+Aynı uçak, aynı donanım — sadece **kimin karar verdiği** değişiyor.
 
 ---
 
@@ -382,6 +504,34 @@ uçuş kartı olmadan bilgisayarda çalışır.
 
 ---
 
+<!-- ─────────── YENİ · SITL vs HITL ─────────── -->
+
+# SITL'in yakın akrabası: HITL
+
+<div class="ky-kartlar" style="--n:2">
+
+  <div class="ky-kart ky-kart--mavi">
+    <div class="ky-kart__ust">SITL</div>
+    <div class="ky-kart__govde">
+      Otopilot <strong>yazılımı</strong> bilgisayarda çalışır.
+      Donanım gerekmez. Bu kursun konusu.
+    </div>
+  </div>
+
+  <div class="ky-kart ky-kart--mor">
+    <div class="ky-kart__ust">HITL</div>
+    <div class="ky-kart__govde">
+      Otopilot <strong>gerçek kartta</strong> çalışır, sensör verisi
+      simülasyondan gelir. Kart gerekir.
+    </div>
+  </div>
+
+</div>
+
+HITL donanımı da test eder; SITL yazılımı test etmek için yeterli.
+
+---
+
 <!-- ─────────── 14 · SİMÜLASYON ↔ GERÇEK ─────────── -->
 
 # Simülasyonda ne değişir?
@@ -424,6 +574,32 @@ Uçağın içinde uçtuğu **sanal dünya**.
   GÖRSEL<br>
   <code>b1-gazebo-dunya.jpg</code><br>
   Gazebo'da uçak, uydu haritalı zemin · en az 960×720
+</div>
+
+</div>
+
+---
+
+<!-- ─────────── YENİ · SDF ─────────── -->
+
+# Dünya ve uçak nasıl tanımlanıyor?
+
+<div class="ky-ikili">
+
+<div>
+
+Gazebo her şeyi **`.sdf`** dosyalarından okuyor. SDF bir XML biçimi —
+etiketlerle yazılmış düz metin.
+
+- **model.sdf** → uçağın gövdesi, kanadı, motoru
+- **world.sdf** → zemin, ışık, içindeki modeller
+
+</div>
+
+<div class="ky-kutu">
+  <div class="ky-kutu__baslik">Açıp okuyabilirsin</div>
+  Kanat açıklığından motor gücüne kadar her değer orada yazıyor.
+  Bölüm 3'te bu dosyalara bakacağız.
 </div>
 
 </div>
@@ -502,6 +678,33 @@ Her katman bir alttakiyle **ayrı bir protokolle** konuşuyor.
   <div class="ky-kutu__baslik">ArduPilotPlugin</div>
   Gazebo ile beyni birbirine bağlayan eklenti. Bölüm 2'de
   kaynaktan derleyeceğiz.
+</div>
+
+</div>
+
+---
+
+<!-- ─────────── YENİ · PLUGIN ─────────── -->
+
+# Köprü: ArduPilotPlugin
+
+<div class="ky-ikili">
+
+<div>
+
+Gazebo ile ArduPilot birbirini **tanımıyor**. Aralarında tercüman
+gerekiyor.
+
+- Gazebo'dan **sensör** verisini alır
+- ArduPilot'a **FDM** ile gönderir
+- Gelen **motor komutunu** modele uygular
+
+</div>
+
+<div class="ky-kutu ky-kutu--uyari">
+  <div class="ky-kutu__baslik">Kurulumun en kritik parçası</div>
+  Bölüm 2'de bunu kaynaktan derleyeceğiz. Yolu yanlış verilirse
+  uçak Gazebo'da <strong>hiç kıpırdamaz</strong>.
 </div>
 
 </div>
@@ -600,6 +803,30 @@ flowchart LR
 
 ---
 
+<!-- ─────────── YENİ · SİM vs GERÇEK AKIŞ ─────────── -->
+
+# Gerçek uçakta bu resim nasıl?
+
+<div class="ky-ikili">
+
+<div class="ky-kutu">
+  <div class="ky-kutu__baslik">Simülasyonda</div>
+  Yer istasyonu → SITL → <strong>Gazebo</strong> → üretilmiş
+  sensör verisi → SITL
+</div>
+
+<div class="ky-kutu ky-kutu--olumlu">
+  <div class="ky-kutu__baslik">Gerçekte</div>
+  Yer istasyonu → Pixhawk → <strong>motorlar</strong> → gerçek
+  sensör verisi → Pixhawk
+</div>
+
+</div>
+
+Değişen tek halka: fiziğin **nerede** hesaplandığı.
+
+---
+
 <!-- ─────────── 24 · 1.5 · PORT NEDİR ─────────── -->
 
 # Port nedir?
@@ -673,6 +900,22 @@ port = taban + 10 × instance
   Kaç uçak açarsan aç, portu hesaplayabilirsin. Bölüm 3'te üç uçağı
   aynı anda kaldırırken bunu kullanacağız.
 </div>
+
+---
+
+<!-- ─────────── YENİ · PORT ÇAKIŞMASI ─────────── -->
+
+# Port çakışırsa ne olur?
+
+<div class="ky-kutu ky-kutu--uyari">
+  <div class="ky-kutu__baslik">Belirti: sessizlik</div>
+  Program çökmez — ekrana hiçbir şey yazmaz, öylece bekler.
+</div>
+
+- Aynı portu **iki program** dinleyemez
+- İkincisi hata vermez, veri de alamaz
+- **Kontrol:** `ss -lunp | grep 14550`
+- Bölüm 6'da bununla karşılaşacağız
 
 ---
 
