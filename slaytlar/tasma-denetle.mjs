@@ -46,19 +46,39 @@ for (let i = 1; i <= N; i++) {
       if (rc.height === 0) continue
       if (rc.bottom > enAlt) { enAlt = rc.bottom; suclu = (e.textContent || '').trim().slice(0, 42) }
     }
+    // YATAY taşma: mermaid diyagramı ölçeği büyütülünce sağ kenardan
+    // sessizce kesiliyordu (kutunun yarısı görünmüyor, hata da yok).
+    // Dikey kontrol bunu göremiyordu; ayrı bakılıyor.
+    const ic = getComputedStyle(k)
+    const solSinir = sk.left + parseFloat(ic.paddingLeft)
+    const sagSinir = sk.right - parseFloat(ic.paddingRight)
+    let enSag = 0, ykSuclu = ''
+    for (const e of k.querySelectorAll('p, li, h1, h2, h3, pre, figcaption, .ky-kutu, .ky-kart, .mermaid svg, img')) {
+      const rc = e.getBoundingClientRect()
+      if (rc.width === 0 || rc.height === 0) continue
+      const asim = Math.max(rc.right - sagSinir, solSinir - rc.left)
+      if (asim > enSag) {
+        enSag = asim
+        ykSuclu = (e.tagName === 'svg' ? 'diyagram' : (e.textContent || '').trim().slice(0, 42))
+      }
+    }
+
     return {
       kaydirma: k.scrollHeight - k.clientHeight,
       tasma: ss ? Math.round(enAlt - ss.top) : 0,
+      yatay: Math.round(enSag),
       suclu,
+      ykSuclu,
     }
   })
 
   if (!r) { console.log(`  ${String(i).padStart(2)}  okunamadi`); continue }
-  const kotu = r.kaydirma > 2 || r.tasma > 0
-  if (kotu) sorunlu++
-  const durum = kotu
-    ? `TASMA  serit ustunu ${r.tasma}px geciyor  ->  "${r.suclu}…"`
-    : 'temiz'
+  const dikeyKotu = r.kaydirma > 2 || r.tasma > 0
+  const yatayKotu = r.yatay > 1
+  if (dikeyKotu || yatayKotu) sorunlu++
+  let durum = 'temiz'
+  if (dikeyKotu) durum = `TASMA  serit ustunu ${r.tasma}px geciyor  ->  "${r.suclu}…"`
+  else if (yatayKotu) durum = `TASMA  saga ${r.yatay}px kesiliyor  ->  "${r.ykSuclu}…"`
   console.log(`  ${String(i).padStart(2)}  ${durum}`)
 }
 
