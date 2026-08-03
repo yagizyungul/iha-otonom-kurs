@@ -1,0 +1,17 @@
+# Bağımlılıklar
+node_modules/
+
+# Slayt çıktıları — kaynaktan yeniden üretilir
+*-export/
+*.pdf
+
+# Arşiv: pilot çekim materyali ve video kayıtları depoya girmez
+arsiv/
+*.mkv
+*.mp4
+
+# Sistem
+.DS_Store
+__pycache__/
+*.pyc
+.venv/

@@ -1,0 +1,358 @@
+/* ============================================================
+   İHA OTONOM KURS — SLAYT TEMASI  (v2, açık tema)
+   GÜN 0 ADIM 7.
+
+   Referans: IBM Skills Network / Coursera ders slaytları.
+   Alınan şey dil: açık zemin, net tipografi, canlı dolgu
+   blokları, başlık altı ince çizgi, altta marka şeridi.
+
+   ---- VİDEO İÇİN ALINAN İKİ KARAR ----
+   1) Zemin saf beyaz DEĞİL (#f6f7f9). Saf beyaz H.264'te parlıyor,
+      bit bütçesinin çoğunu boş alana harcatıyor ve gözü yoruyor.
+   2) Canlı renkler DOLGU bloklarında kullanılıyor, ince yazıda değil.
+      NV12 4:2:0 kroma altörnekleme doygun renkli küçük yazıyı dağıtır;
+      renkli metin gerektiğinde koyu tonlar (--kr-*-koyu) kullanılır.
+
+   ---- ÖLÇÜLER ----
+   Slidev tuvali 980px, 1920px'e ölçekleniyor (x1.96).
+   Telefon testinden kalırsan tek yapman gereken --ky-metin büyütmek.
+   ============================================================ */
+
+:root {
+  /* --- zemin / metin --- */
+  --ky-zemin:  #f6f7f9;
+  --ky-kart:   #ffffff;
+  --ky-metin-r:#14171c;
+  --ky-soluk:  #5a6473;
+  --ky-cizgi:  #dde1e8;
+
+  /* --- canlı dolgu renkleri (blok içi, üzerine beyaz) --- */
+  --kr-mor:    #6e4bf0;
+  --kr-pembe:  #e5427e;
+  --kr-turkuaz:#00a6a0;
+  --kr-mavi:   #1257f0;
+
+  /* --- aynı renklerin metin için koyu karşılıkları (açık zeminde >4.5:1) --- */
+  --kr-mor-koyu:    #5433cc;
+  --kr-pembe-koyu:  #c01f63;
+  --kr-turkuaz-koyu:#006b67;
+  --kr-mavi-koyu:   #0b3fc4;
+
+  /* --- ölçüler (980px tuval uzayında) --- */
+  --ky-metin:  28px;
+  --ky-h1:     54px;
+  --ky-h2:     38px;
+  --ky-h3:     28px;
+  --ky-kod:    24px;
+  --ky-kart-metin: 22px;
+
+  /* Filigran: kendi logonu koyacaksan gorseller/logo.svg olarak bırak,
+     sonra aşağıdaki satırdaki none yerine url('/gorseller/logo.svg') yaz. */
+  --ky-filigran: none;
+}
+
+/* ---------- genel ---------- */
+.slidev-layout {
+  background: var(--ky-zemin);
+  color: var(--ky-metin-r);
+  font-size: var(--ky-metin);
+  line-height: 1.5;
+  padding: 2rem 3rem 4.2rem;   /* altta marka şeridine yer */
+  position: relative;
+}
+
+/* Filigran: referanstaki soluk merkez grafiği. Varsayılan kapalı. */
+.slidev-layout::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--ky-filigran);
+  background-repeat: no-repeat;
+  background-position: center 55%;
+  background-size: 34%;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* Başlık + altındaki ince çizgi (referansın imzası) */
+.slidev-layout h1 {
+  font-size: var(--ky-h1);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.55em;
+  padding-bottom: 0.28em;
+  border-bottom: 2px solid var(--ky-cizgi);
+}
+
+.slidev-layout h2 {
+  font-size: var(--ky-h2);
+  font-weight: 600;
+  color: var(--kr-mavi-koyu);
+  margin-bottom: 0.45em;
+}
+
+.slidev-layout h3 {
+  font-size: var(--ky-h3);
+  font-weight: 600;
+  color: var(--ky-soluk);
+  margin-bottom: 0.3em;
+}
+
+.slidev-layout p { margin: 0 0 0.6em; }
+/* line-height burada AÇIKÇA veriliyor: temanın/UnoCSS sıfırlamasının
+   verdiği 1.8'e yakın değer, sarma yapan maddelerde satırları birbirinden
+   koparıyordu (iki sütunlu düzende çok belli oluyor). */
+.slidev-layout p,
+.slidev-layout li {
+  font-size: var(--ky-metin);
+  line-height: 1.35;
+}
+
+.slidev-layout ul { list-style: none; padding-left: 0; margin: 0; }
+.slidev-layout ul > li {
+  position: relative;
+  padding-left: 1.45em;
+  margin-bottom: 0.5em;
+}
+/* Nokta yerine kısa kalın çizgi: 1080p'de nokta kayboluyor. */
+.slidev-layout ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.7em;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--kr-mavi);
+}
+
+.slidev-layout strong { font-weight: 600; color: var(--kr-mavi-koyu); }
+.slidev-layout a { color: var(--kr-mavi-koyu); }
+
+/* ---------- kod ---------- */
+/* KURAL: kod satırı en fazla 58 karakter.
+   980px tuvalde kullanılabilir genişlik ~840px, 24px tek aralıklıda
+   karakter ~14.4px -> 58. Uzun satır sağdan sessizce kesilir; PNG'de
+   kaydırma çubuğu görünmediği için fark etmezsin. */
+.slidev-layout code {
+  font-size: var(--ky-kod);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.slidev-layout :not(pre) > code {
+  background: #efe9fb;                 /* referanstaki açık lavanta */
+  border-radius: 4px;
+  padding: 0.06em 0.32em;
+  color: var(--kr-mor-koyu);
+}
+
+.slidev-layout pre {
+  background: #f2eefc !important;      /* kod paneli */
+  border: none;
+  border-left: 5px solid var(--kr-mor);
+  border-radius: 0 8px 8px 0;
+  padding: 1.05rem 1.3rem !important;
+  line-height: 1.55;
+}
+
+/* Vurgulanmayan satırlar. 0.3 fazla agresifti (PNG'de kod okunmuyordu),
+   0.45 hem vurguyu belli ediyor hem bağlamı bırakıyor.
+   NOT: `npm run export` tıklama adımlarını ayrı sayfa basmaz; adımlı
+   kod slaytını dışa aktarırken --with-clicks ekle. */
+.slidev-layout .shiki .line.dimmed { opacity: 0.45 !important; }
+
+/* ---------- KART IZGARASI (ders hedefi arketipi) ---------- */
+.ky-kartlar {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 3), 1fr);
+  gap: 1.4rem;
+  margin-top: 0.4em;
+}
+
+.ky-kart { display: flex; flex-direction: column; }
+
+/* Üstteki canlı renkli blok — ikon ya da büyük rakam taşır */
+.ky-kart__ust {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 62px;
+  font-weight: 600;
+  line-height: 1;
+}
+.ky-kart--mor     .ky-kart__ust { background: var(--kr-mor); }
+.ky-kart--pembe   .ky-kart__ust { background: var(--kr-pembe); }
+.ky-kart--turkuaz .ky-kart__ust { background: var(--kr-turkuaz); }
+.ky-kart--mavi    .ky-kart__ust { background: var(--kr-mavi); }
+
+.ky-kart__govde {
+  background: var(--ky-kart);
+  padding: 0.85rem 1rem 1.1rem;
+  font-size: var(--ky-kart-metin);
+  line-height: 1.4;
+  flex: 1;
+}
+
+/* ---------- KUTU (uyarı / bilgi arketipi) ---------- */
+.ky-kutu {
+  border-left: 6px solid var(--kr-mavi);
+  background: var(--ky-kart);
+  border-radius: 0 8px 8px 0;
+  padding: 0.95rem 1.35rem;
+  margin: 0.55em 0;
+}
+.ky-kutu--uyari   { border-left-color: var(--kr-pembe); }
+.ky-kutu--olumlu  { border-left-color: var(--kr-turkuaz); }
+.ky-kutu__baslik {
+  font-weight: 600;
+  font-size: var(--ky-h3);
+  margin-bottom: 0.2em;
+  color: var(--kr-mavi-koyu);
+}
+.ky-kutu--uyari  .ky-kutu__baslik { color: var(--kr-pembe-koyu); }
+.ky-kutu--olumlu .ky-kutu__baslik { color: var(--kr-turkuaz-koyu); }
+
+/* ---------- GÖRSEL YERLEŞİMİ ---------- */
+/* Metin solda, görsel sağda (ya da tersi: .ky-ikili--ters) */
+.ky-ikili {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+/* Sütun yarı genişlikte olduğu için 28px fazla sarıyor; 24px hem sığıyor
+   hem telefon testini geçiyor (1080p'de ~47px).
+   .ky-kutu de listeye dahil: içeriği düz div olduğu için p/li kuralına
+   takılmıyordu, sol sütun 24px kalırken sağdaki kutu 28px kalıyordu. */
+.ky-ikili p,
+.ky-ikili li,
+.ky-ikili .ky-kutu {
+  font-size: 24px;
+  line-height: 1.35;
+}
+.ky-ikili--ters { direction: rtl; }
+.ky-ikili--ters > * { direction: ltr; }
+
+.ky-gorsel {
+  background: var(--ky-kart);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* Sabit yükseklikli çerçeve + object-fit: contain.
+   Neden cover DEĞİL: bu derste üç ayrı en-boy oranı var — logo 400x96 (çok
+   geniş), kart fotoğrafı 800x800 (kare), ekran görüntüsü 567x352. cover
+   hepsini kutuya doldurmak için kırpardı; logonun yarısı gider, ekran
+   görüntüsünün kenarları kesilirdi. contain hepsini bozmadan sığdırır,
+   artan yeri beyaz bırakır. */
+/* 320px denendi: satır yükselince sol sütun alt marka şeridinin üstüne
+   taşıyordu. 260px, en uzun metinli sütunla birlikte slayta sığıyor. */
+.ky-gorsel__cerceve {
+  height: 260px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.1rem;
+}
+.ky-gorsel__cerceve img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+/* Logolar kenara yapışmasın */
+.ky-gorsel--logo .ky-gorsel__cerceve { padding: 2.4rem; }
+
+.ky-gorsel figcaption {
+  font-size: 18px;
+  line-height: 1.35;
+  color: var(--ky-soluk);
+  padding: 0.6rem 0.9rem 0.8rem;
+}
+
+/* Görseli henüz koymadığın yerler için: nereye ne geleceği belli olsun */
+.ky-gorsel-yer {
+  border: 3px dashed var(--ky-cizgi);
+  border-radius: 8px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3em;
+  color: var(--ky-soluk);
+  font-size: 20px;
+  text-align: center;
+  padding: 1rem;
+}
+.ky-gorsel-yer code { font-size: 18px; }
+
+/* Kenardan kenara görsel (tam slayt) */
+.ky-tam-gorsel {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.ky-tam-gorsel img { width: 100%; height: 100%; object-fit: cover; }
+/* Üstüne yazı gelecekse okunurluk için koyu perde */
+.ky-tam-gorsel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10,12,16,.82) 0%, rgba(10,12,16,.45) 55%, rgba(10,12,16,.15) 100%);
+}
+.ky-tam-yazi { position: relative; z-index: 1; color: #fff; }
+.ky-tam-yazi h1 { color: #fff; border-bottom-color: rgba(255,255,255,.3); }
+
+/* ---------- KAPAK ---------- */
+.slidev-layout.cover { padding: 3rem 3.5rem 4.2rem; }
+.slidev-layout.cover h1 { border-bottom: none; padding-bottom: 0; margin-bottom: 0.15em; }
+.ky-kapak-serit {
+  width: 120px;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--kr-mor);
+  margin-bottom: 1.5rem;
+}
+.ky-kapak-alt { color: var(--ky-soluk); font-size: 26px; }
+
+/* ---------- DİYAGRAM ---------- */
+.slidev-layout .mermaid { background: transparent; text-align: center; }
+/* 62vh denendi: başlık + diyagram + alt cümle slaytı aşıyordu. */
+.slidev-layout .mermaid svg { max-height: 48vh; max-width: 100%; height: auto; }
+
+/* ---------- MARKA ŞERİDİ ---------- */
+.ky-altbilgi {
+  position: absolute;
+  bottom: 1.15rem;
+  left: 3rem;
+  right: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  color: var(--ky-soluk);
+  border-top: 2px solid var(--ky-cizgi);
+  padding-top: 0.5rem;
+  z-index: 2;
+}
+.ky-altbilgi__sol {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--kr-mor-koyu);   /* logo bunu currentColor olarak miras alıyor */
+}
+.ky-logo { width: 26px; height: 26px; flex: none; }
+.ky-altbilgi__marka { font-weight: 600; }
+
+/* Slidev'in kendi sayfa numarası kayıtta dikkat dağıtıyor. */
+.slidev-page-number { display: none; }

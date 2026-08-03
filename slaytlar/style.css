@@ -1,0 +1,3 @@
+/* Slidev bu dosyayı otomatik yükler. Gerçek tema tema/stil.css içinde;
+   müfredatın §7'de verdiği yol orası olduğu için ikiye ayrıldı. */
+@import './tema/stil.css';

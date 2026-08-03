@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" role="img" aria-label="İHA Otonom Sistemler">
+  <!--
+    Delta kanat, üstten görünüş. Tek parça, dolgu yok-boşluk yok:
+    slayt altbilgisinde ~55px yüksekliğe iniyor ve H.264'ten geçiyor,
+    o ölçekte pervane/gövde detayı olan bir çizim lekeye dönüşürdü.
+    currentColor kullanıldığı için koyu ve açık zeminde ayrı dosya gerekmiyor.
+  -->
+  <path fill="currentColor" d="M20 4 L35.5 33 L20 25.8 L4.5 33 Z"/>
+</svg>
