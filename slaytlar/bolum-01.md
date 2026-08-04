@@ -94,11 +94,12 @@ Bölüm 1 · Sistem nasıl çalışıyor?
 
 </div>
 
-<div class="ky-gorsel-yer">
-  GÖRSEL<br>
-  <code>b1-iha-genel.jpg</code><br>
-  Sabit kanat İHA, havada · en az 960×720
-</div>
+<figure class="ky-gorsel">
+  <div class="ky-gorsel__cerceve">
+    <img src="/gorseller/b1-iha-genel.jpg" alt="Havada uçan sabit kanat İHA">
+  </div>
+  <figcaption>Pilotu içinde olmayan bir hava aracı</figcaption>
+</figure>
 
 </div>
 
@@ -147,15 +148,15 @@ Hepsinin ortak noktası: **uzun süre**, **geniş alan**, **tekrarlanabilir rota
 <div class="ky-ikili">
 
 <figure class="ky-gorsel">
-  <div class="ky-gorsel-yer" style="min-height:260px;border:none">
-    <code>b1-sabit-kanat.jpg</code>
+  <div class="ky-gorsel__cerceve">
+    <img src="/gorseller/b1-sabit-kanat.jpg" alt="Sabit kanat model uçak">
   </div>
   <figcaption><strong>Sabit kanat</strong> — uzun menzil, yüksek hız</figcaption>
 </figure>
 
 <figure class="ky-gorsel">
-  <div class="ky-gorsel-yer" style="min-height:260px;border:none">
-    <code>b1-multirotor.jpg</code>
+  <div class="ky-gorsel__cerceve">
+    <img src="/gorseller/b1-multirotor.jpg" alt="Çok pervaneli multirotor İHA">
   </div>
   <figcaption><strong>Multirotor</strong> — havada durabilir, dikey kalkış</figcaption>
 </figure>
@@ -570,11 +571,12 @@ Uçağın içinde uçtuğu **sanal dünya**.
 
 </div>
 
-<div class="ky-gorsel-yer">
-  GÖRSEL<br>
-  <code>b1-gazebo-dunya.jpg</code><br>
-  Gazebo'da uçak, uydu haritalı zemin · en az 960×720
-</div>
+<figure class="ky-gorsel">
+  <div class="ky-gorsel__cerceve">
+    <img src="/gorseller/b1-gazebo-dunya.jpg" alt="Gazebo'da uydu haritalı pist ve uçaklar">
+  </div>
+  <figcaption>Gazebo: uydu haritalı zemin ve pistteki uçaklar</figcaption>
+</figure>
 
 </div>
 
