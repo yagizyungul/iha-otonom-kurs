@@ -715,17 +715,176 @@ gz sim -v4 shapes.sdf
 
 <!-- ─────────── 19 · PENCERE AÇILMIYORSA ─────────── -->
 
-# Gazebo penceresi açılmıyorsa
+# Ekran kartı neden önemli?
+
+<div class="ky-ikili">
+
+<div>
+
+Gazebo iki ağır iş yapıyor: **3B çizim** ve **fizik hesabı**. İkisi de
+ekran kartından güç alıyor.
+
+Yanlış kart kullanılırsa ya pencere **hiç açılmaz**, ya da açılır ama
+**5 FPS** gider — uçak zıplaya zıplaya uçar.
+
+</div>
+
+<div class="ky-kutu ky-kutu--uyari">
+  <div class="ky-kutu__baslik">Dizüstülerde iki kart var</div>
+  Biri <strong>Intel</strong> (tasarruflu), biri <strong>NVIDIA</strong>
+  (güçlü). Linux çoğu zaman varsayılan olarak Intel'i seçiyor.
+</div>
+
+</div>
+
+---
+
+<!-- ─────────── + · HANGİ KART ÇİZİYOR ─────────── -->
+
+# Hangi kart çiziyor?
+
+Önce ölçüm aracını kuruyoruz:
 
 <!-- KOMUT -->
 ```bash
-echo $DISPLAY          # boşsa oturum sorunu var
-glxinfo | grep OpenGL  # sürücü çalışıyor mu
+sudo apt install -y mesa-utils
 ```
 
-- **Sanal makinede:** 3B hızlandırma açık mı
-- **NVIDIA'lı dizüstü:** ekran kartı seçimi gerekebilir
-- **Wayland oturumu:** Xorg oturumuna geç
+<!-- KOMUT -->
+```bash
+glxinfo | grep "OpenGL renderer"
+```
+
+Bu komut tahmin etmeyi bitiriyor — o an **hangi kartın çizdiğini**
+doğrudan söylüyor.
+
+---
+
+<!-- ─────────── + · ÇIKTIYI OKU ─────────── -->
+
+# Çıktıyı oku
+
+<div class="ky-kartlar ky-kartlar--kisa">
+
+  <div class="ky-kart ky-kart--turkuaz">
+    <div class="ky-kart__ust">✓</div>
+    <div class="ky-kart__govde">
+      <strong>NVIDIA GeForce…</strong><br>
+      İdeal. Gazebo tam hızda çalışır.
+    </div>
+  </div>
+
+  <div class="ky-kart ky-kart--mavi">
+    <div class="ky-kart__ust">~</div>
+    <div class="ky-kart__govde">
+      <strong>Mesa Intel…</strong><br>
+      Çalışır ama yavaş. NVIDIA'n varsa ona geç.
+    </div>
+  </div>
+
+  <div class="ky-kart ky-kart--pembe">
+    <div class="ky-kart__ust">✗</div>
+    <div class="ky-kart__govde">
+      <strong>llvmpipe</strong><br>
+      Ekran kartı hiç kullanılmıyor — işlemci çiziyor.
+    </div>
+  </div>
+
+</div>
+
+`llvmpipe` görüyorsan sürücü kurulu değil demektir.
+
+---
+
+<!-- ─────────── + · SÜRÜCÜ ─────────── -->
+
+# NVIDIA sürücüsü kurulu mu?
+
+<!-- KOMUT -->
+```bash
+nvidia-smi
+```
+
+Tablo geliyorsa sürücü çalışıyor — üstte **sürüm**, altta **kart adı**
+ve bellek yazar.
+
+<div class="ky-kutu ky-kutu--uyari">
+  <div class="ky-kutu__baslik">"command not found" diyorsa</div>
+  Sürücü yok. <strong>Software &amp; Updates → Additional Drivers</strong>
+  penceresinden tescilli NVIDIA sürücüsünü seç, kur, yeniden başlat.
+</div>
+
+---
+class: kod-sm
+---
+
+<!-- ─────────── + · NVIDIA'YA ZORLA ─────────── -->
+
+# Gazebo'yu NVIDIA'da çalıştır
+
+Sürücü var ama `glxinfo` Intel diyorsa çizimi yönlendiriyoruz:
+
+<!-- KOMUT -->
+```bash
+__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia \
+  glxinfo | grep "OpenGL renderer"
+```
+
+Şimdi NVIDIA yazıyorsa yöntem çalışıyor. Kalıcı kısayol:
+
+<!-- KOMUT -->
+```bash
+echo "alias gznv='__NV_PRIME_RENDER_OFFLOAD=1 \
+__GLX_VENDOR_LIBRARY_NAME=nvidia gz'" >> ~/.bashrc
+```
+
+Bundan sonra `gz sim` yerine **`gznv sim`** yazacaksın.
+
+---
+
+<!-- ─────────── + · WAYLAND / XORG ─────────── -->
+
+# Wayland mı, Xorg mu?
+
+<!-- KOMUT -->
+```bash
+echo $XDG_SESSION_TYPE
+```
+
+<div class="ky-ikili">
+
+<div>
+
+`x11` çıkmalı. `wayland` çıkıyorsa Gazebo ve NVIDIA yönlendirmesi sorun
+çıkarabilir.
+
+**Geçiş:** oturumu kapat → giriş ekranında **dişli** simgesi →
+**Ubuntu on Xorg** → gir.
+
+</div>
+
+<div class="ky-kutu ky-kutu--uyari">
+  <div class="ky-kutu__baslik">Harici monitörde sadece imleç mi var?</div>
+  Bu tam olarak Wayland sorunudur. Xorg'a geçince düzelir.
+</div>
+
+</div>
+
+---
+
+<!-- ─────────── + · HÂLÂ AÇILMIYORSA ─────────── -->
+
+# Hâlâ açılmıyorsa
+
+- **Sanal makinede:** VirtualBox → Ekran → **3B hızlandırma** açık,
+  video belleği 128 MB
+- **Uzak bağlantıda** (SSH/RDP): 3B çizim gitmez, makinenin başına geç
+- **Açılıyor ama yavaş:** Gazebo'da gölgeleri kapat, pencereyi küçült
+
+<div class="ky-kutu ky-kutu--olumlu">
+  <div class="ky-kutu__baslik">Bu ders için ölçüt</div>
+  <code>gz sim -v4 shapes.sdf</code> açılıyor ve akıcı dönüyorsa yeterli.
+</div>
 
 ---
 
