@@ -395,26 +395,15 @@ git submodule update --init --recursive
 
 # Kaynak nereden geliyor?
 
-<div class="ky-ikili">
+ArduPilot **GitHub**'da açık kaynak; `git clone` deponun tam kopyasını
+geçmişiyle birlikte indiriyor.
 
-<div>
-
-ArduPilot, **GitHub**'da açık kaynak olarak duruyor. Dünyanın her
-yerinden binlerce kişi aynı koda katkı veriyor.
-
-`git clone` o deponun tam bir kopyasını bilgisayarına indiriyor —
-geçmişiyle birlikte.
-
-</div>
-
-<figure class="ky-gorsel">
+<figure class="ky-gorsel ky-gorsel--genis">
   <div class="ky-gorsel__cerceve">
     <img src="/gorseller/b2-github-ardupilot.png" alt="ArduPilot GitHub deposu">
   </div>
-  <figcaption>github.com/ArduPilot/ardupilot</figcaption>
+  <figcaption>github.com/ArduPilot/ardupilot — 15,6 bin yıldız, 73 bin commit</figcaption>
 </figure>
-
-</div>
 
 ---
 
@@ -1112,22 +1101,63 @@ ve dünya dosyalarını içeriyor.
 
 <!-- ─────────── 27 · UAV_TRANSFER ─────────── -->
 
-# Kursun üç uçağı
+# Kurs deposunu indir
+
+Bundan sonraki adımlarda **kursa özel** dosyalar lazım. Hepsi tek depoda:
 
 <!-- KOMUT -->
 ```bash
 cd ~
-tar -xzf UAV_TRANSFER.tar.gz
+git clone https://github.com/yagizyungul/iha-otonom-kurs.git
+```
+
+- `kurulum/UAV_TRANSFER.tar.gz` → kursun **üç uçağı**
+- `kurulum/create_satellite_ground.py` → uydu görüntülü zemin
+- `kod/` → sonraki bölümlerin Python dosyaları
+
+---
+
+<!-- ─────────── + · DEPODA NE VAR ─────────── -->
+
+# Neden ayrı bir depo?
+
+<div class="ky-ikili">
+
+<div>
+
+ArduPilot ve SITL_Models **resmî** depolar — herkese açık, genel amaçlı.
+
+Kursun üç uçağı, dünya dosyası ve yardımcı script'ler orada **yok**.
+Onları biz hazırladık, kendi depomuzda duruyorlar.
+
+</div>
+
+<div class="ky-kutu ky-kutu--olumlu">
+  <div class="ky-kutu__baslik">Bir kez indir, hep kullan</div>
+  Bu depoyu bir daha indirmeyeceksin. Bölüm 6, 7 ve 8'in kodları da
+  burada. Güncelleme gelirse <code>git pull</code> yeter.
+</div>
+
+</div>
+
+---
+
+<!-- ─────────── + · ÜÇ UÇAĞI KUR ─────────── -->
+
+# Üç uçağı kur
+
+<!-- KOMUT -->
+```bash
+cp ~/iha-otonom-kurs/kurulum/UAV_TRANSFER.tar.gz ~/
+cd ~ && tar -xzf UAV_TRANSFER.tar.gz
 cd ~/UAV_TRANSFER
 chmod +x install.sh
 ./install.sh
 ```
 
-<div class="ky-kutu ky-kutu--olumlu">
-  <div class="ky-kutu__baslik">Dosya nereye inecek?</div>
-  <code>UAV_TRANSFER.tar.gz</code> kurs deposunda. İndirdikten sonra
-  <strong>ev dizinine taşı</strong> — komut orada arıyor.
-</div>
+- `cp` → paketi depodan **ev dizinine** kopyalar
+- `tar -xzf` → arşivi **açar**
+- `chmod +x` → script'e **çalıştırma izni** verir
 
 ---
 

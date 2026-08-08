@@ -299,6 +299,11 @@
   padding: 0.6rem 0.9rem 0.8rem;
 }
 
+/* Geniş ekran görüntüleri (GitHub sayfası gibi) iki sütuna sıkışınca
+   okunmuyor. Bu varyant tam genişlik kullanır ve çerçeveyi yükseltir. */
+.ky-gorsel--genis .ky-gorsel__cerceve { height: 245px; padding: 0.5rem; }
+.ky-gorsel--genis figcaption { font-size: 17px; }
+
 /* Görseli henüz koymadığın yerler için: nereye ne geleceği belli olsun */
 .ky-gorsel-yer {
   border: 3px dashed var(--ky-cizgi);
