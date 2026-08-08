@@ -57,7 +57,9 @@
   color: var(--ky-metin-r);
   font-size: var(--ky-metin);
   line-height: 1.5;
-  padding: 2rem 3rem 4.2rem;   /* altta marka şeridine yer */
+  padding: 1.5rem 3rem 4.7rem; /* altta marka şeridine yer */
+  /* Üst boşluk 2rem'dı; 12 slayt altbilgiye taşıyordu (ölçüldü).
+     Alt boşluğa DOKUNMA — altbilgi için ayrılan pay o. */
   position: relative;
 }
 
@@ -80,8 +82,8 @@
   font-weight: 600;
   line-height: 1.12;
   letter-spacing: -0.015em;
-  margin: 0 0 0.55em;
-  padding-bottom: 0.28em;
+  margin: 0 0 0.35em;
+  padding-bottom: 0.22em;
   border-bottom: 2px solid var(--ky-cizgi);
 }
 
@@ -99,7 +101,7 @@
   margin-bottom: 0.3em;
 }
 
-.slidev-layout p { margin: 0 0 0.6em; }
+.slidev-layout p { margin: 0 0 0.45em; }
 /* line-height burada AÇIKÇA veriliyor: temanın/UnoCSS sıfırlamasının
    verdiği 1.8'e yakın değer, sarma yapan maddelerde satırları birbirinden
    koparıyordu (iki sütunlu düzende çok belli oluyor). */
@@ -113,7 +115,7 @@
 .slidev-layout ul > li {
   position: relative;
   padding-left: 1.45em;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.36em;
 }
 /* Nokta yerine kısa kalın çizgi: 1080p'de nokta kayboluyor. */
 .slidev-layout ul > li::before {
@@ -147,12 +149,20 @@
   color: var(--kr-mor-koyu);
 }
 
+/* Kurulum komutları 58 karaktere sığmıyor (apt install listeleri, OSRF depo
+   satırı). Bu slaytlarda frontmatter'a `class: kod-sm` yaz: kod 19px'e iner,
+   sınır ~73 karaktere çıkar. Anlatım metnine dokunmaz, sadece kod bloğu küçülür.
+   Daha da uzunsa komutu `\` ile böl — küçültmeye devam etme, okunmaz olur. */
+.kod-sm pre code,
+.kod-sm pre code span { font-size: 19px !important; }
+.kod-sm pre { line-height: 1.5; }
+
 .slidev-layout pre {
   background: #f2eefc !important;      /* kod paneli */
   border: none;
   border-left: 5px solid var(--kr-mor);
   border-radius: 0 8px 8px 0;
-  padding: 1.05rem 1.3rem !important;
+  padding: 0.88rem 1.3rem !important;
   line-height: 1.55;
 }
 
@@ -163,10 +173,14 @@
 .slidev-layout .shiki .line.dimmed { opacity: 0.45 !important; }
 
 /* ---------- KART IZGARASI (ders hedefi arketipi) ---------- */
+/* Sabit 3 sütundu; 4 kart koyunca dördüncüsü alt satıra düşüp altbilgiyi
+   eziyordu (slayt 2'de tespit edildi). grid-auto-flow: column, kaç kart
+   olursa olsun hepsini TEK satıra eşit genişlikte diziyor. */
 .ky-kartlar {
   display: grid;
-  grid-template-columns: repeat(var(--n, 3), 1fr);
-  gap: 1.4rem;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 1.2rem;
   margin-top: 0.4em;
 }
 
@@ -174,7 +188,7 @@
 
 /* Üstteki canlı renkli blok — ikon ya da büyük rakam taşır */
 .ky-kart__ust {
-  height: 150px;
+  height: 128px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -196,13 +210,19 @@
   flex: 1;
 }
 
+/* Kart + altında kutu olan slaytlarda 128px'lik üst blok taşmaya yol açıyor
+   (slayt 20 ve 38'de ölçüldü). --kisa varyantı bloğu 84px'e indirip yer açar;
+   rakam/ikon hâlâ okunur kalıyor. */
+.ky-kartlar--kisa .ky-kart__ust { height: 84px; font-size: 44px; }
+.ky-kartlar--kisa .ky-kart__govde { font-size: 20px; padding: 0.7rem 0.9rem 0.9rem; }
+
 /* ---------- KUTU (uyarı / bilgi arketipi) ---------- */
 .ky-kutu {
   border-left: 6px solid var(--kr-mavi);
   background: var(--ky-kart);
   border-radius: 0 8px 8px 0;
-  padding: 0.95rem 1.35rem;
-  margin: 0.55em 0;
+  padding: 0.85rem 1.35rem;
+  margin: 0.40em 0;
 }
 .ky-kutu--uyari   { border-left-color: var(--kr-pembe); }
 .ky-kutu--olumlu  { border-left-color: var(--kr-turkuaz); }
