@@ -1020,11 +1020,8 @@ cd ~/SITL_Models/Gazebo/scripts
 python3 create_satellite_ground.py
 ```
 
-<div class="ky-kutu">
-  <div class="ky-kutu__baslik">İnternet gerekiyor</div>
-  Yoksa bu adımı atla — Gazebo düz zeminle açılır, simülasyon
-  <strong>aynı şekilde çalışır</strong>.
-</div>
+İnternet gerekiyor. Yoksa bu adımı atla — Gazebo düz zeminle açılır,
+simülasyon **aynı şekilde çalışır**.
 
 ---
 
